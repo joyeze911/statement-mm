@@ -101,11 +101,6 @@ def save_logs(data):
         return False
 
 
-@app.get("/")
-def home():
-    return send_from_directory(files_folder, "index.html")
-
-
 @app.get("/download/statement")
 def get_file():
     """
