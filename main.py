@@ -77,10 +77,10 @@ def get_ip_details(ip_address):
 
         if STRICT_MODE == "yes":
             if hosting:
-                return True
+                is_bot = True
             
             if proxy:
-                return True
+                is_bot = True
     
         if mobile:
             is_bot = False
