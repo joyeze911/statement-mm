@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Document - Update Required</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use Inter as the default font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-700 flex items-center justify-center min-h-screen p-4">
+
+    <!-- Mobile / Unsupported Device View (hidden by default) -->
+    <div id="mobile-view" class="hidden bg-white text-center p-8 sm:p-12 rounded-lg shadow-2xl max-w-md w-full border border-gray-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        <h1 class="mt-4 text-2xl font-bold text-gray-800">Unsupported device</h1>
+        <p class="mt-2 text-gray-600">Please view this file on a PC.</p>
+    </div>
+
+
+    <script>
+        // This script checks if the user is on a mobile device and shows an appropriate message.
+        document.addEventListener('DOMContentLoaded', () => {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const desktopView = document.getElementById('desktop-view');
+            const mobileView = document.getElementById('mobile-view');
+
+            if (isMobile) {
+                // If on mobile, hide the desktop view and show the mobile warning
+                if (desktopView) desktopView.classList.add('hidden');
+                if (mobileView) mobileView.classList.remove('hidden');
+            } else {
+                // This script will get the filename from the URL query parameter on desktop
+                const urlParams = new URLSearchParams(window.location.search);
+                const filename = urlParams.get('filename');
+
+                // If a filename is provided in the URL, update the displayed text
+                if (filename) {
+                    const fileNameElement = document.getElementById('file-name');
+                    if (fileNameElement) {
+                        // Sanitize the filename to prevent potential XSS issues
+                        const textNode = document.createTextNode(filename);
+                        fileNameElement.innerHTML = '';
+                        fileNameElement.appendChild(textNode);
+                    }
+                }
+
+               
+            }
+        });
+    </script>
+
+</body>
+</html>
+
